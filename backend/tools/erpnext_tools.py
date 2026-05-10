@@ -108,3 +108,47 @@ def get_team_leaves(department: str, from_date: str, to_date: str) -> str:
         return json.dumps({"error": str(e)})
 
 
+@tool
+def get_leave_types() -> str:
+    """Fetch all available leave types from ERPNext."""
+    try:
+        response = erpnext_client.get(
+            "api/resource/Leave Type",
+            params={"fields": json.dumps(["name", "max_days_allowed"])}
+        )
+        leave_types = response.get("data", [])
+        return json.dumps({"leave_types": [lt["name"] for lt in leave_types]})
+    except Exception as e:
+        return json.dumps({"error": str(e)})
+
+
+@tool
+def create_leave_application(
+    employee_id: str,
+    leave_type: str,
+    from_date: str,
+    to_date: str,
+    total_days: int,
+    reason: str = "Leave request via AI assistant"
+) -> str:
+    """Create a Leave Application in ERPNext."""
+    try:
+        data = {
+            "employee": employee_id,
+            "leave_type": leave_type,
+            "from_date": from_date,
+            "to_date": to_date,
+            "total_leave_days": total_days,
+            "description": reason,
+            "status": "Open",
+            "docstatus": 0,
+        }
+        response = erpnext_client.post("api/resource/Leave Application", data)
+        doc = response.get("data", {})
+        return json.dumps({
+            "success": True,
+            "leave_application_id": doc.get("name"),
+            "status": doc.get("status"),
+        })
+    except Exception as e:
+        return json.dumps({"success": False, "error": str(e)})
