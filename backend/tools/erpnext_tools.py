@@ -78,3 +78,33 @@ def get_leave_balance(employee_id: str, leave_type: str) -> str:
         return json.dumps({"error": str(e)})
 
 
+@tool
+def get_team_leaves(department: str, from_date: str, to_date: str) -> str:
+    """Get approved leave applications for a department in a date range."""
+    try:
+        response = erpnext_client.get(
+            "api/resource/Leave Application",
+            params={
+                "filters": json.dumps([
+                    ["department", "=", department],
+                    ["from_date", "<=", to_date],
+                    ["to_date", ">=", from_date],
+                    ["docstatus", "=", 1],
+                ]),
+                "fields": json.dumps([
+                    "employee", "employee_name", "leave_type",
+                    "from_date", "to_date", "total_leave_days", "status"
+                ]),
+            }
+        )
+        leaves = response.get("data", [])
+        return json.dumps({
+            "department": department,
+            "date_range": f"{from_date} to {to_date}",
+            "colleagues_on_leave": len(leaves),
+            "details": leaves,
+        })
+    except Exception as e:
+        return json.dumps({"error": str(e)})
+
+
