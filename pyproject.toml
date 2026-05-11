@@ -1,0 +1,18 @@
+[project]
+name = "fyntwin-assignment"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "agno[groq]>=2.6.5",
+    "fastapi>=0.136.1",
+    "groq>=1.2.0",
+    "httpx>=0.28.1",
+    "openai>=2.36.0",
+    "pydantic-settings>=2.14.1",
+    "python-dotenv>=1.2.2",
+    "requests>=2.33.1",
+    "streamlit>=1.57.0",
+    "uvicorn>=0.46.0",
+]
