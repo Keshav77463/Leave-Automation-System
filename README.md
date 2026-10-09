@@ -79,7 +79,7 @@ User clicks Cancel → POST /api/v1/confirm {"confirmed": false}
 ## 🏗️ Project Structure
 
 ```
-Fyntwin-assignment/
+Leave request automation/
 ├── backend/
 │   ├── main.py                    # FastAPI app entry point, CORS, router registration
 │   ├── config.py                  # pydantic-settings — loads all config from .env
@@ -135,8 +135,8 @@ Fyntwin-assignment/
 ### Step 1 — Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/Fyntwin-assignment.git
-cd Fyntwin-assignment
+git clone https://github.com/<your-username>/leave automation system.git
+cd leave automation system
 ```
 
 ### Step 2 — Create and activate a virtual environment
@@ -349,4 +349,4 @@ Balance Check Result
 
 ---
 
-*Built for Fyntwin Intern Assignment #06 — HR Leave Management Module*
+*Built for Intern Assignment #06 — HR Leave Management Module*
