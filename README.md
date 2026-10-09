@@ -1,5 +1,5 @@
 # 🏖️ Leave Request Automation System
-### Fyntwin Intern Assignment — Module: HR Leave Management
+### Module: HR Leave Management
 
 > An intelligent ERP automation assistant that understands natural language leave requests and processes them against a live ERPNext instance using a multi-agent AI team.
 
